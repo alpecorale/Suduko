@@ -30,11 +30,13 @@ public class Main {
         board1.setRow8(row8);
         board1.setRow9(row9);
 
-        System.out.println(board1.rowHas(board1.getRow1(),8));
+        System.out.println(board1.rowHas(1,8));
         System.out.println(board1.boxHas(1,6));
         System.out.println(board1.colHas(4,4));
 
+        board1.solve();
 
+        /*
         int i = 0;
         while (i == 0) { // While loop for Scanner Inputs to accept commands from user
 
@@ -58,7 +60,7 @@ public class Main {
                 default:
                     System.out.println("Sorry that is not a valid command. Please enter one of the commands from the practice sheet. If you would like to exit the program type 'EXIT'");
             }
-        }
+        }*/
     }
 
 }
