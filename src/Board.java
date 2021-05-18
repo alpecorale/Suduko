@@ -334,13 +334,36 @@ public class Board {
 
     private Ennead<Integer, Integer, Integer, Integer,  Integer, Integer, Integer, Integer, Integer> savedRow1;
 
-    public void solve(){
+    public int rowPlaced;
+    public int colPlaced;
+    //public int firstTry;
+
+    public boolean solve(){
+
+        int checkCounter = 0;
+        for (int checkRow = 1; checkRow < 2; checkRow++) {
+            if (!rowHas(checkRow, 0)) {
+                checkCounter++;
+            }
+        } // checks if there are any 0's left in rows
+        if (checkCounter == 1){
+            System.out.println(row1);
+            System.out.println(row2);
+            System.out.println(row3);
+            System.out.println(row4);
+            System.out.println(row5);
+            System.out.println(row6);
+            System.out.println(row7);
+            System.out.println(row8);
+            System.out.println(row9);
+            return true;
+        }// if there are no 0's left returns all of the rows in terminal
 
 
         for (int whatRow = 1; whatRow < 2; whatRow++) {
+            int columnIndex = 0;
+            int boxIndex = 0;
             while (rowHas(whatRow, 0 )) {
-                int columnIndex = 0;
-                int boxIndex = 0;
                 switch(whatRow){
                     case 1:
                         columnIndex = row1.indexOf(0);
@@ -443,15 +466,15 @@ public class Board {
                         }
                 } // finds the box number
 
-                for (int firstTry = 1; firstTry < 10; firstTry++) {
+                for (int firstTry = 1; firstTry < 10;) {
                     if (!rowHas(whatRow, firstTry) && !colHas(columnIndex, firstTry) && !boxHas(boxIndex, firstTry)) {
                         System.out.println("Row: " + whatRow + " Column: " + columnIndex + " Box: " + boxIndex);
                         System.out.println("Try: " + firstTry);
                         System.out.println("xxxxxxxx");
 
-                        switch(whatRow) {
+                        switch (whatRow) {
                             case 1:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row1 = row1.setAt0(firstTry);
                                         break;
@@ -482,7 +505,7 @@ public class Board {
                                 }
                                 break;
                             case 2:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row2 = row2.setAt0(firstTry);
                                         break;
@@ -513,7 +536,7 @@ public class Board {
                                 }
                                 break;
                             case 3:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row3 = row3.setAt0(firstTry);
                                         break;
@@ -544,7 +567,7 @@ public class Board {
                                 }
                                 break;
                             case 4:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row4 = row4.setAt0(firstTry);
                                         break;
@@ -575,7 +598,7 @@ public class Board {
                                 }
                                 break;
                             case 5:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row5 = row5.setAt0(firstTry);
                                         break;
@@ -606,7 +629,7 @@ public class Board {
                                 }
                                 break;
                             case 6:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row6 = row6.setAt0(firstTry);
                                         break;
@@ -626,7 +649,7 @@ public class Board {
                                         row6 = row6.setAt5(firstTry);
                                         break;
                                     case 7:
-                                        row6= row6.setAt6(firstTry);
+                                        row6 = row6.setAt6(firstTry);
                                         break;
                                     case 8:
                                         row6 = row6.setAt7(firstTry);
@@ -637,7 +660,7 @@ public class Board {
                                 }
                                 break;
                             case 7:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row7 = row7.setAt0(firstTry);
                                         break;
@@ -668,7 +691,7 @@ public class Board {
                                 }
                                 break;
                             case 8:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row8 = row8.setAt0(firstTry);
                                         break;
@@ -699,7 +722,7 @@ public class Board {
                                 }
                                 break;
                             case 9:
-                                switch(columnIndex) {
+                                switch (columnIndex) {
                                     case 1:
                                         row9 = row9.setAt0(firstTry);
                                         break;
@@ -731,12 +754,300 @@ public class Board {
                                 break;
                         } // adds numbers to rows
                         System.out.println(row1);
-                        solve();
+                        rowPlaced = whatRow;
+                        colPlaced = columnIndex;
                     }
-
+                    firstTry++;
+                    if (solve()) {
+                        System.out.println(row1);
+                        return true;
+                    } else {
+                        switch (rowPlaced) {
+                            case 1:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row1 = row1.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row1 = row1.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row1 = row1.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row1 = row1.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row1 = row1.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row1 = row1.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row1 = row1.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row1 = row1.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row1 = row1.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 2:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row2 = row2.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row2 = row2.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row2 = row2.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row2 = row2.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row2 = row2.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row2 = row2.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row2 = row2.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row2 = row2.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row2 = row2.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 3:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row3 = row3.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row3 = row3.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row3 = row3.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row3 = row3.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row3 = row3.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row3 = row3.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row3 = row3.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row3 = row3.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row3 = row3.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 4:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row4 = row4.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row4 = row4.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row4 = row4.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row4 = row4.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row4 = row4.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row4 = row4.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row4 = row4.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row4 = row4.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row4 = row4.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 5:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row5 = row5.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row5 = row5.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row5 = row5.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row5 = row5.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row5 = row5.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row5 = row5.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row5 = row5.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row5 = row5.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row5 = row5.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 6:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row6 = row6.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row6 = row6.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row6 = row6.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row6 = row6.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row6 = row6.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row6 = row6.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row6 = row6.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row6 = row6.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row6 = row6.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 7:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row7 = row7.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row7 = row7.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row7 = row7.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row7 = row7.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row7 = row7.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row7 = row7.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row7 = row7.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row7 = row7.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row7 = row7.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 8:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row8 = row8.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row8 = row8.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row8 = row8.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row8 = row8.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row8 = row8.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row8 = row8.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row8 = row8.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row8 = row8.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row8 = row8.setAt8(0);
+                                        break;
+                                }
+                                break;
+                            case 9:
+                                switch (colPlaced) {
+                                    case 1:
+                                        row9 = row9.setAt0(0);
+                                        break;
+                                    case 2:
+                                        row9 = row9.setAt1(0);
+                                        break;
+                                    case 3:
+                                        row9 = row9.setAt2(0);
+                                        break;
+                                    case 4:
+                                        row9 = row9.setAt3(0);
+                                        break;
+                                    case 5:
+                                        row9 = row9.setAt4(0);
+                                        break;
+                                    case 6:
+                                        row9 = row9.setAt5(0);
+                                        break;
+                                    case 7:
+                                        row9 = row9.setAt6(0);
+                                        break;
+                                    case 8:
+                                        row9 = row9.setAt7(0);
+                                        break;
+                                    case 9:
+                                        row9 = row9.setAt8(0);
+                                        break;
+                                }
+                                break;
+                        } // resets location to 0
+                    }
                 }
             }
         }
+        return true;
     }
 
 }
