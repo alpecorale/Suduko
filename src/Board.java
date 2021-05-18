@@ -336,7 +336,7 @@ public class Board {
 
     public int rowPlaced;
     public int colPlaced;
-    //public int firstTry;
+    public int firstTry = 0;
 
     public boolean solve(){
 
@@ -359,120 +359,120 @@ public class Board {
             return true;
         }// if there are no 0's left returns all of the rows in terminal
 
-
         for (int whatRow = 1; whatRow < 2; whatRow++) {
             int columnIndex = 0;
             int boxIndex = 0;
-            while (rowHas(whatRow, 0 )) {
-                switch(whatRow){
-                    case 1:
-                        columnIndex = row1.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 2:
-                        columnIndex = row2.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 3:
-                        columnIndex = row3.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 4:
-                        columnIndex = row4.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 5:
-                        columnIndex = row5.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 6:
-                        columnIndex = row6.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 7:
-                        columnIndex = row7.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 8:
-                        columnIndex = row8.indexOf(0);
-                        columnIndex++;
-                        break;
-                    case 9:
-                        columnIndex = row9.indexOf(0);
-                        columnIndex++;
-                        break;
-                } // finds the column number
-                switch(whatRow){
-                    case 1:
-                    case 2:
-                    case 3:
-                        switch (columnIndex){
-                            case 1:
-                            case 2:
-                            case 3:
-                                boxIndex = 1;
-                                break;
-                            case 4:
-                            case 5:
-                            case 6:
-                                boxIndex = 2;
-                                break;
-                            case 7:
-                            case 8:
-                            case 9:
-                                boxIndex = 3;
-                                break;
-                        }
-                        break;
-                    case 4:
-                    case 5:
-                    case 6:
-                        switch (columnIndex){
-                            case 1:
-                            case 2:
-                            case 3:
-                                boxIndex = 4;
-                                break;
-                            case 4:
-                            case 5:
-                            case 6:
-                                boxIndex = 5;
-                                break;
-                            case 7:
-                            case 8:
-                            case 9:
-                                boxIndex = 6;
-                                break;
-                        }
-                    case 7:
-                    case 8:
-                    case 9:
-                        switch (columnIndex){
-                            case 1:
-                            case 2:
-                            case 3:
-                                boxIndex = 7;
-                                break;
-                            case 4:
-                            case 5:
-                            case 6:
-                                boxIndex = 8;
-                                break;
-                            case 7:
-                            case 8:
-                            case 9:
-                                boxIndex = 9;
-                                break;
-                        }
-                } // finds the box number
+            if (rowHas(whatRow, 0)) {
+                switch (whatRow) {
+                        case 1:
+                            columnIndex = row1.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 2:
+                            columnIndex = row2.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 3:
+                            columnIndex = row3.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 4:
+                            columnIndex = row4.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 5:
+                            columnIndex = row5.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 6:
+                            columnIndex = row6.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 7:
+                            columnIndex = row7.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 8:
+                            columnIndex = row8.indexOf(0);
+                            columnIndex++;
+                            break;
+                        case 9:
+                            columnIndex = row9.indexOf(0);
+                            columnIndex++;
+                            break;
+                    } // finds the column number
+                switch (whatRow) {
+                        case 1:
+                        case 2:
+                        case 3:
+                            switch (columnIndex) {
+                                case 1:
+                                case 2:
+                                case 3:
+                                    boxIndex = 1;
+                                    break;
+                                case 4:
+                                case 5:
+                                case 6:
+                                    boxIndex = 2;
+                                    break;
+                                case 7:
+                                case 8:
+                                case 9:
+                                    boxIndex = 3;
+                                    break;
+                            }
+                            break;
+                        case 4:
+                        case 5:
+                        case 6:
+                            switch (columnIndex) {
+                                case 1:
+                                case 2:
+                                case 3:
+                                    boxIndex = 4;
+                                    break;
+                                case 4:
+                                case 5:
+                                case 6:
+                                    boxIndex = 5;
+                                    break;
+                                case 7:
+                                case 8:
+                                case 9:
+                                    boxIndex = 6;
+                                    break;
+                            }
+                        case 7:
+                        case 8:
+                        case 9:
+                            switch (columnIndex) {
+                                case 1:
+                                case 2:
+                                case 3:
+                                    boxIndex = 7;
+                                    break;
+                                case 4:
+                                case 5:
+                                case 6:
+                                    boxIndex = 8;
+                                    break;
+                                case 7:
+                                case 8:
+                                case 9:
+                                    boxIndex = 9;
+                                    break;
+                            }
+                    } // finds the box number
 
-                for (int firstTry = 1; firstTry < 10;) {
-                    if (!rowHas(whatRow, firstTry) && !colHas(columnIndex, firstTry) && !boxHas(boxIndex, firstTry)) {
-                        System.out.println("Row: " + whatRow + " Column: " + columnIndex + " Box: " + boxIndex);
-                        System.out.println("Try: " + firstTry);
-                        System.out.println("xxxxxxxx");
+                firstTry = firstTry % 10;
 
-                        switch (whatRow) {
+                if (!rowHas(whatRow, firstTry) && !colHas(columnIndex, firstTry) && !boxHas(boxIndex, firstTry)) {
+                    System.out.println("Row: " + whatRow + " Column: " + columnIndex + " Box: " + boxIndex);
+                    System.out.println("Try: " + firstTry);
+                    System.out.println("xxxxxxxx");
+
+                    switch (whatRow) {
                             case 1:
                                 switch (columnIndex) {
                                     case 1:
@@ -753,16 +753,16 @@ public class Board {
                                 }
                                 break;
                         } // adds numbers to rows
-                        System.out.println(row1);
-                        rowPlaced = whatRow;
-                        colPlaced = columnIndex;
-                    }
-                    firstTry++;
-                    if (solve()) {
-                        System.out.println(row1);
-                        return true;
-                    } else {
-                        switch (rowPlaced) {
+                    System.out.println(row1);
+                    rowPlaced = whatRow;
+                    colPlaced = columnIndex;
+                }
+                firstTry++;
+                if (solve()) {
+                    System.out.println(row1);
+                    return true;
+                } else {
+                    switch (rowPlaced) {
                             case 1:
                                 switch (colPlaced) {
                                     case 1:
@@ -1043,11 +1043,11 @@ public class Board {
                                 }
                                 break;
                         } // resets location to 0
-                    }
                 }
             }
         }
-        return true;
+
+        return false;
     }
 
 }
